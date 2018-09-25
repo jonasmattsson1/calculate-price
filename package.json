@@ -1,0 +1,22 @@
+{
+  "name": "task_clean",
+  "version": "1.0.0",
+  "description": "This application calculates price based on different rules and values.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode development",
+    "release": "webpack --mode production",
+    "test": "test"
+  },
+  "author": "Jonas Mattsson",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.2",
+    "jsdom-quokka-plugin": "^1.0.13",
+    "webpack": "^4.20.0",
+    "webpack-cli": "^3.1.1"
+  }
+}
