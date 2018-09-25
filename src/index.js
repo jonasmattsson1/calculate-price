@@ -34,14 +34,14 @@ const calculatePrice = function(userType, productType, price, publishedDate){
     let calculatedPrice = 0
 
     userTypes.map( user => {
-        const { id, type, rebate = 0 } = { ...user }
+        const { id, rebate = 0 } = { ...user }
 
         // Only handle right userType
         if(id !== userType){ return }
 
         const productFee = getProductFee(productFees, productType)
         const todayRebate = productFee.name === "new" ? getTodayRebate(publishedDate, newRebate) : 0
-        const rebates = rebat + todayRebate;
+        const rebates = rebate + todayRebate;
 
         calculatedPrice = price + productFee.amount - rebates; 
     })
