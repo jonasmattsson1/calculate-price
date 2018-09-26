@@ -1,4 +1,4 @@
-import configData from './config.js'
+import configData from './configData.js'
 import { getProductObj, getTodayRebate } from './calculatorHelpers.js'
 
 /**
