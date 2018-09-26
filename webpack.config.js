@@ -1,19 +1,27 @@
 const path = require('path')
 
 module.exports = {
-    entry: './src/index.js',
+    mode: 'development',
+    entry: {
+        'price-calculator': './src/index.js',
+    },
     output: {
-        filename: 'price-calculator.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'dist') 
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules)/,
                 use: {
                 loader: 'babel-loader',
                 }
+            },
+            {
+                test: /spec\.js$/,
+                use: 'mocha-loader',
+                exclude: /node_modules/
             }
         ]
     }

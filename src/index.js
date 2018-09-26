@@ -1,5 +1,5 @@
 import { productFees, newRebate, userTypes } from './config.js'
-import { getProductFee, getTodayRebate } from './helpers.js'
+import { getProductFee, getTodayRebate } from './calculatorHelpers.js'
 
 
 /**
@@ -9,7 +9,7 @@ import { getProductFee, getTodayRebate } from './helpers.js'
  * @param {*} price - Product price
  * @param {*} publishedDate - Date object
  */
-const calculatePrice = function(userType, productType, price, publishedDate){
+export const calculatePrice = function(userType, productType, price, publishedDate){
     let calculatedPrice = 0
 
     userTypes.map( user => {
@@ -20,14 +20,13 @@ const calculatePrice = function(userType, productType, price, publishedDate){
 
         const productFee = getProductFee(productFees, productType)
         const todayRebate = productFee.name === "new" ? getTodayRebate(publishedDate, newRebate) : 0
-        const rebates = rebate + todayRebate;
+        const rebates = rebate + todayRebate
 
-        calculatedPrice = price + productFee.amount - rebates; 
+        calculatedPrice = price + productFee.amount - rebates
     })
 
     return calculatedPrice
 }
 
 // Expose calculatePrice to the global scope
-window.calculatePrice = calculatePrice;
-
+global.calculatePrice = calculatePrice

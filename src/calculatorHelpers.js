@@ -15,7 +15,7 @@ export const isToday = (date) => {
  * @param {number} productTypeId - ProductType id
  * @return {number} - Fee amount
  */
-const getProductFee = (feeConfig, productTypeId = 0) => {
+ export const getProductFee = (feeConfig, productTypeId = 0) => {
     return feeConfig.find( fee => fee.id === productTypeId)
 }
 
@@ -25,6 +25,6 @@ const getProductFee = (feeConfig, productTypeId = 0) => {
  * @param {Date} date - Date object
  * @param {number} rebate - 
  */
-const getTodayRebate = (date, rebate) => {
+export const getTodayRebate = (date, rebate) => {
     return isToday(date) ? rebate : 0;
 }

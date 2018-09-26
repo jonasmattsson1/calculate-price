@@ -1,3 +1,6 @@
+
+import {calculatePrice} from '../src/index.js' 
+
 describe('price calculator', function(){
 	
 	it('should calc price right', function(){
