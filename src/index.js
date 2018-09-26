@@ -1,5 +1,5 @@
-import { productFees, newRebate, userTypes } from './config.js'
-import { getProductFee, getTodayRebate } from './calculatorHelpers.js'
+import { productTypes, newRebate, userTypes } from './config.js'
+import { getProductObj, getTodayRebate } from './calculatorHelpers.js'
 
 
 /**
@@ -9,7 +9,8 @@ import { getProductFee, getTodayRebate } from './calculatorHelpers.js'
  * @param {*} price - Product price
  * @param {*} publishedDate - Date object
  */
-export const calculatePrice = function(userType, productType, price, publishedDate){
+export const calculatePrice = function(userType, productType, price=0, publishedDate){
+   
     let calculatedPrice = 0
 
     userTypes.map( user => {
@@ -18,11 +19,13 @@ export const calculatePrice = function(userType, productType, price, publishedDa
         // Only handle right userType
         if(id !== userType){ return }
 
-        const productFee = getProductFee(productFees, productType)
-        const todayRebate = productFee.name === "new" ? getTodayRebate(publishedDate, newRebate) : 0
+        const productObject = getProductObj(productTypes, productType)
+        const todayRebate = productObject.type === "new" ? getTodayRebate(publishedDate, newRebate) : 0
         const rebates = rebate + todayRebate
 
-        calculatedPrice = price + productFee.amount - rebates
+        calculatedPrice = price;
+        calculatedPrice += productObject.price ? productObject.price : 0;
+        calculatedPrice -= rebates
     })
 
     return calculatedPrice
