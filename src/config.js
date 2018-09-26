@@ -1,14 +1,14 @@
 
-const productFees = [
+const productTypes = [
     {
         id: 0,
-        name: 'new',
-        amount: 25
+        type: 'new',
+        price: 25
     },
     {   
         id: 1,
-        name: 'old',
-        amount: 35
+        type: 'old',
+        price: 35
     }
 ]
 
@@ -28,4 +28,4 @@ const userTypes = [
     }
 ]
 
-export { productFees, newRebate,  userTypes }
+export { productTypes, newRebate,  userTypes }

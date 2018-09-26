@@ -11,13 +11,14 @@ export const isToday = (date) => {
 /**
  * Takes an feeConfig object and an productType id, and return the fee
  * 
- * @param {Object} feeConfig - Fee config object
+ * @param {Array} productTypes - Fee config array
  * @param {number} productTypeId - ProductType id
  * @return {number} - Fee amount
  */
- export const getProductFee = (feeConfig, productTypeId = 0) => {
-    return feeConfig.find( fee => fee.id === productTypeId)
+ export const getProductObj = (productTypes = [], productTypeId = 0) => {
+    return productTypes.find( product => product.id === productTypeId) || {}
 }
+
 
 /**
  * Get the rebate of the day.
