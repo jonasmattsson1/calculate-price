@@ -11,7 +11,7 @@ export const isToday = (date) => {
 /**
  * Takes an feeConfig object and an productType id, and return the fee
  * 
- * @param {Array} productTypes - Fee config array
+ * @param {Array} productTypes - ProductTypes array
  * @param {number} productTypeId - ProductType id
  * @return {number} - Fee amount
  */
