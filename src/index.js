@@ -2,11 +2,12 @@ import configData from './configData.js'
 import { isToday } from './helpers.js'
 
 /**
+ * Calculates the product price based on userType, productType and publishedDate
  * 
  * @param {number} userType - Id of the userType
- * @param {*} productType - Id of the productType
- * @param {*} price - Product price
- * @param {*} publishedDate - Date object
+ * @param {number} productType - Id of the productType
+ * @param {number} price - Product price
+ * @param {Object} publishedDate - Date object
  */
 export const calculatePrice = function(userType=[], productType, price=0, publishedDate){
 
@@ -15,7 +16,7 @@ export const calculatePrice = function(userType=[], productType, price=0, publis
     // Get the right user config based on userType
     const userTypeConfig = configData.userTypes.find(user => user.id === userType)
     // Get the right productType config based on productType
-    const productTypeConfig = configData.productTypes.find( type => type.id === productType)
+    const productTypeConfig = configData.productTypes.find(type => type.id === productType)
     const todayRebate = (productTypeConfig.type === "new" && isToday(publishedDate)) ? configData.newRebate : 0
     const rebates = userTypeConfig.rebate + todayRebate
 
