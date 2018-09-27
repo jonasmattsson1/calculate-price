@@ -9,16 +9,16 @@ import { isToday } from './helpers.js'
  * @param {number} price - Product price
  * @param {Object} publishedDate - Date object
  */
-export const calculatePrice = function(userType=[], productType, price=0, publishedDate){
+export const calculatePrice = function(userType, productType, price=0, publishedDate){
 
     let calculatedPrice = 0
 
     // Get the right user config based on userType
-    const userTypeConfig = configData.userTypes.find(user => user.id === userType)
+    const userTypeConfig = configData.userTypes.find(user => user.id === userType) || {}
     // Get the right productType config based on productType
-    const productTypeConfig = configData.productTypes.find(type => type.id === productType)
+    const productTypeConfig = configData.productTypes.find(type => type.id === productType) || {}
     const todayRebate = (productTypeConfig.type === "new" && isToday(publishedDate)) ? configData.newRebate : 0
-    const rebates = userTypeConfig.rebate + todayRebate
+    const rebates = userTypeConfig.rebate + todayRebate || 0
 
     calculatedPrice = price
     calculatedPrice += productTypeConfig.additinalPrice
