@@ -15,7 +15,8 @@ const configData = {
     userTypes: [
         {
             type: 'normal',
-            id: 0
+            id: 0,
+            rebate: 0
         },
         {
             type: 'customer',

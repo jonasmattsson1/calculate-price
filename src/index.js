@@ -12,20 +12,15 @@ export const calculatePrice = function(userType, productType, price=0, published
 
     let calculatedPrice = 0
 
-    configData.userTypes.map( user => {
-        const { id, rebate = 0 } = { ...user }
+    const userObject = configData.userTypes.find(user => user.id === userType)
+    const productObject = getProductObj(configData.productTypes, productType)
 
-        // Only handle right userType
-        if(id !== userType){ return }
+    const todayRebate = productObject.type === "new" ? getTodayRebate(publishedDate, configData.newRebate) : 0
+    const rebates = userObject.rebate + todayRebate
 
-        const productObject = getProductObj(configData.productTypes, productType)
-        const todayRebate = productObject.type === "new" ? getTodayRebate(publishedDate, configData.newRebate) : 0
-        const rebates = rebate + todayRebate
-
-        calculatedPrice = price;
-        calculatedPrice += productObject.price ? productObject.price : 0;
-        calculatedPrice -= rebates
-    })
+    calculatedPrice = price
+    calculatedPrice += productObject.price ? productObject.price : 0
+    calculatedPrice -= rebates
 
     return calculatedPrice
 }
