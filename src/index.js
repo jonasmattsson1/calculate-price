@@ -14,7 +14,6 @@ export const calculatePrice = function(userType, productType, price=0, published
 
     const userObject = configData.userTypes.find(user => user.id === userType)
     const productObject = getProductObj(configData.productTypes, productType)
-
     const todayRebate = productObject.type === "new" ? getTodayRebate(publishedDate, configData.newRebate) : 0
     const rebates = userObject.rebate + todayRebate
 

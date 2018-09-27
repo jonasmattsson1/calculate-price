@@ -2,9 +2,7 @@ import { isToday, getTodayRebate, getProductObj } from '../src/calculatorHelpers
 
 // Global constants
 const today = new Date()
-const newDate = new Date()
-const yesterday = newDate.setDate(newDate.getDate() - 1)
-
+const oldDate = new Date('2019-01-01')
 
 describe('isToday', ()=> {
 
@@ -24,8 +22,8 @@ describe('isToday', ()=> {
         expect(isToday()).to.equal(false)
     })
 
-    it('should return false yesterdays date is passed', ()=> {
-        expect(isToday(yesterday)).to.equal(false)
+    it('should return false if an old date is passed', ()=> {
+        expect(isToday(oldDate)).to.equal(false)
     })
 })
 
@@ -39,9 +37,9 @@ describe('getTodayRebate', ()=> {
         expect(myrebate).to.equal(rebate)
     })
 
-    it('should return 0 if it is not today', ()=> {
+    it('should return 0 if date is not today', ()=> {
         const expected = 0
-        const myrebate = getTodayRebate(yesterday, rebate)
+        const myrebate = getTodayRebate(oldDate, rebate)
 
         expect(myrebate).to.equal(expected)
     })
