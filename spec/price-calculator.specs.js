@@ -74,4 +74,16 @@ describe('price-calculator', function(){
 
 		expect(expected).to.equal(actual);
 	})
+
+	it('should return undefined and not throw error if invalid parameters is passed', function(){
+		const userType = 100;
+		const productType = '101';
+		const price = -1;
+		const publishedDate = undefined;
+
+		const expected = undefined;
+		const actual = calculatePrice(userType, productType, price, publishedDate);
+
+		expect(expected).to.equal(actual);
+	})
 });
