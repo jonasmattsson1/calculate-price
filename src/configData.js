@@ -3,12 +3,12 @@ const configData = {
         {
             id: 0,
             type: 'new',
-            price: 25
+            additinalPrice: 25
         },
         {   
             id: 1,
             type: 'old',
-            price: 35
+            additinalPrice: 35
         }
     ],
     newRebate: 10,

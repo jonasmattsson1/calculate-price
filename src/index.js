@@ -1,5 +1,5 @@
 import configData from './configData.js'
-import { getProductObj, getTodayRebate } from './calculatorHelpers.js'
+import { isToday } from './helpers.js'
 
 /**
  * 
@@ -8,17 +8,19 @@ import { getProductObj, getTodayRebate } from './calculatorHelpers.js'
  * @param {*} price - Product price
  * @param {*} publishedDate - Date object
  */
-export const calculatePrice = function(userType, productType, price=0, publishedDate){
+export const calculatePrice = function(userType=[], productType, price=0, publishedDate){
 
     let calculatedPrice = 0
 
-    const userObject = configData.userTypes.find(user => user.id === userType)
-    const productObject = getProductObj(configData.productTypes, productType)
-    const todayRebate = productObject.type === "new" ? getTodayRebate(publishedDate, configData.newRebate) : 0
-    const rebates = userObject.rebate + todayRebate
+    // Get the right user config based on userType
+    const userTypeConfig = configData.userTypes.find(user => user.id === userType)
+    // Get the right productType config based on productType
+    const productTypeConfig = configData.productTypes.find( type => type.id === productType)
+    const todayRebate = (productTypeConfig.type === "new" && isToday(publishedDate)) ? configData.newRebate : 0
+    const rebates = userTypeConfig.rebate + todayRebate
 
     calculatedPrice = price
-    calculatedPrice += productObject.price ? productObject.price : 0
+    calculatedPrice += productTypeConfig.additinalPrice
     calculatedPrice -= rebates
 
     return calculatedPrice
