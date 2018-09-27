@@ -14,11 +14,17 @@ export const calculatePrice = function(userType, productType, price=0, published
     let calculatedPrice = 0
 
     // Get the right user config based on userType
-    const userTypeConfig = configData.userTypes.find(user => user.id === userType) || {}
+    const userTypeConfig = configData.userTypes.find(user => user.id === userType)
     // Get the right productType config based on productType
-    const productTypeConfig = configData.productTypes.find(type => type.id === productType) || {}
+    const productTypeConfig = configData.productTypes.find(type => type.id === productType)
+
+    if(!userTypeConfig || !productTypeConfig){
+        // Return undefined if userType or productType is invalid
+        return 
+    }
+
     const todayRebate = (productTypeConfig.type === "new" && isToday(publishedDate)) ? configData.newRebate : 0
-    const rebates = userTypeConfig.rebate + todayRebate || 0
+    const rebates = userTypeConfig.rebate + todayRebate
 
     calculatedPrice = price
     calculatedPrice += productTypeConfig.additinalPrice
